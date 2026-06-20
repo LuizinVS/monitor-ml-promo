@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: ml-promo-postgres
+    environment:
+      POSTGRES_DB: mlpromo
+      POSTGRES_USER: mlpromo
+      POSTGRES_PASSWORD: mlpromo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
