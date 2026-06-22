@@ -1,9 +1,12 @@
 package monitor_ml_promo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "price_history")
 public class PriceHistory {
@@ -21,4 +24,5 @@ public class PriceHistory {
 
     @Column(nullable = false)
     private LocalTime timestamp;
+
 }
