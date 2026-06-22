@@ -3,6 +3,7 @@ package monitor_ml_promo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -23,6 +24,6 @@ public class PriceHistory {
     private Double price;
 
     @Column(nullable = false)
-    private LocalTime timestamp;
+    private LocalDateTime timestamp;
 
 }

@@ -1,5 +1,6 @@
 package monitor_ml_promo.client;
 
+import monitor_ml_promo.DTO.MercadoLivreItemResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
