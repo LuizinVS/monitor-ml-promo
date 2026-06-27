@@ -1,1 +1,13 @@
-# ML Promo Monitor
+## Como rodar o projeto
+
+1. Subir banco:
+   docker compose up -d
+
+2. Rodar aplicação:
+   ./mvnw spring-boot:run
+
+3. Expor API com ngrok:
+   ngrok http 8080
+
+4. Configurar Redirect URI:
+   https://xxxx.ngrok-free.app/oauth/callback
