@@ -10,4 +10,4 @@
    ngrok http 8080
 
 4. Configurar Redirect URI:
-   https://xxxx.ngrok-free.app/oauth/callback
+   https://portion-swipe-satiable.ngrok-free.dev/oauth/callback
