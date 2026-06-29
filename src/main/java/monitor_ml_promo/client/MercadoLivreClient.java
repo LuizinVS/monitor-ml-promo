@@ -16,14 +16,13 @@ public class MercadoLivreClient {
 
     private static final String BASE_URL = "https://api.mercadolibre.com";
 
-    public MercadoLivreItemResponse getItemById(String id, String accessToken) {
+    public MercadoLivreItemResponse getItemById(String id) {
 
         String url = BASE_URL + "/items/" + id;
 
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("User-Agent", "Mozilla/5.0");
-            headers.setBearerAuth(accessToken);
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 

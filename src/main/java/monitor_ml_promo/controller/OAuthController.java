@@ -28,6 +28,8 @@ public class OAuthController {
 
         tokenService.setAccessToken(token.getAccess_token());
 
+        System.out.println("Token salvo: " + tokenService.getAccessToken());
+
         return token;
     }
 

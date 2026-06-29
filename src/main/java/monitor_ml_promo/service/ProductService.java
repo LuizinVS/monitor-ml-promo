@@ -30,11 +30,8 @@ public class ProductService {
     }
 
     public void fetchAndSaveProduct(String productId) {
-
-        String token = tokenService.getAccessToken();
-
         MercadoLivreItemResponse response =
-                mercadoLivreClient.getItemById(productId, token);
+                mercadoLivreClient.getItemById(productId);
 
         Product product = new Product();
         product.setId(response.id);

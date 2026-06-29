@@ -29,9 +29,7 @@ public class ProductController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Product> fetchAndSaveProduct(
-            @PathVariable String id,
-            @RequestParam String accessToken) {
+    public ResponseEntity<Product> fetchAndSaveProduct(@PathVariable String id) {
 
         service.fetchAndSaveProduct(id);
 
