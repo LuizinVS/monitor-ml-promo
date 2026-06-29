@@ -29,9 +29,14 @@ public class ProductController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Product> fetchAndSaveProduct(@PathVariable String id) {
+    public ResponseEntity<Product> fetchAndSaveProduct(
+            @PathVariable String id,
+            @RequestParam String accessToken) {
+
         service.fetchAndSaveProduct(id);
+
         Optional<Product> p = productRepository.findById(id);
+
         return p.map(product -> new ResponseEntity<>(product, HttpStatus.CREATED))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

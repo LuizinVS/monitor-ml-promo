@@ -16,19 +16,25 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final PriceHistoryRepository priceHistoryRepository;
     private final MercadoLivreClient mercadoLivreClient;
+    private final TokenService tokenService;
 
     public ProductService(ProductRepository productRepository,
                           PriceHistoryRepository priceHistoryRepository,
-                          MercadoLivreClient mercadoLivreClient) {
+                          MercadoLivreClient mercadoLivreClient,
+                          TokenService tokenService) {
+
         this.productRepository = productRepository;
         this.priceHistoryRepository = priceHistoryRepository;
         this.mercadoLivreClient = mercadoLivreClient;
+        this.tokenService = tokenService;
     }
 
     public void fetchAndSaveProduct(String productId) {
 
+        String token = tokenService.getAccessToken();
+
         MercadoLivreItemResponse response =
-                mercadoLivreClient.getItemById(productId);
+                mercadoLivreClient.getItemById(productId, token);
 
         Product product = new Product();
         product.setId(response.id);
