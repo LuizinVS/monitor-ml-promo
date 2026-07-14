@@ -16,17 +16,14 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final PriceHistoryRepository priceHistoryRepository;
     private final MercadoLivreClient mercadoLivreClient;
-    private final TokenService tokenService;
 
     public ProductService(ProductRepository productRepository,
                           PriceHistoryRepository priceHistoryRepository,
-                          MercadoLivreClient mercadoLivreClient,
-                          TokenService tokenService) {
+                          MercadoLivreClient mercadoLivreClient) {
 
         this.productRepository = productRepository;
         this.priceHistoryRepository = priceHistoryRepository;
         this.mercadoLivreClient = mercadoLivreClient;
-        this.tokenService = tokenService;
     }
 
     public void fetchAndSaveProduct(String productId) {

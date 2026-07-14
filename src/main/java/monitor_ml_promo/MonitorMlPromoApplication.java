@@ -14,17 +14,4 @@ public class MonitorMlPromoApplication {
 		SpringApplication.run(MonitorMlPromoApplication.class, args);
 	}
 
-    @Bean
-    CommandLineRunner test(ProductRepository repository) {
-        return args -> {
-            Product product = new Product();
-
-            product.setId("MLB123");
-            product.setTitle("Produto Teste");
-
-            repository.save(product);
-
-            System.out.println("Produto salvo com sucesso!");
-        };
-    }
 }
