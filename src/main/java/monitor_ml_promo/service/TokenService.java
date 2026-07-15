@@ -1,14 +1,17 @@
 package monitor_ml_promo.service;
 
-import lombok.Value;
+
+import monitor_ml_promo.DTO.TokenResponseDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.http.HttpHeaders;
+
 import java.time.LocalDateTime;
 
 @Service
