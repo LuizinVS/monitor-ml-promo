@@ -1,6 +1,8 @@
 package monitor_ml_promo.client;
 
+import monitor_ml_promo.DTO.MercadoLivreBatchItemResponse;
 import monitor_ml_promo.DTO.MercadoLivreItemResponse;
+import monitor_ml_promo.service.TokenService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -9,38 +11,41 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class MercadoLivreClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
+    private final TokenService tokenService;
 
     private static final String BASE_URL = "https://api.mercadolibre.com";
 
+    public MercadoLivreClient(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
+
     public MercadoLivreItemResponse getItemById(String id) {
+        return getItemsByIds(List.of(id)).get(0);
+    }
 
-        String url = BASE_URL + "/items/" + id;
+    public List<MercadoLivreItemResponse> getItemsByIds(List<String> ids) {
+        String idsParam = String.join(",", ids);
+        String url = BASE_URL + "/items?ids=" + idsParam;
 
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("User-Agent", "Mozilla/5.0");
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + tokenService.getAccessToken());
 
-            HttpEntity<Void> entity = new HttpEntity<>(headers);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-            ResponseEntity<MercadoLivreItemResponse> response =
-                    restTemplate.exchange(
-                            url,
-                            HttpMethod.GET,
-                            entity,
-                            MercadoLivreItemResponse.class
-                    );
+        ResponseEntity<MercadoLivreBatchItemResponse[]> response = restTemplate.exchange(
+                url, HttpMethod.GET, entity, MercadoLivreBatchItemResponse[].class
+        );
 
-            return response.getBody();
-
-        } catch (HttpClientErrorException e) {
-            System.out.println("Erro ML: " + e.getStatusCode());
-            System.out.println("Body: " + e.getResponseBodyAsString());
-
-            throw e;
-        }
+        return Arrays.stream(response.getBody())
+                .map(MercadoLivreBatchItemResponse::getBody)
+                .collect(Collectors.toList());
     }
 }
